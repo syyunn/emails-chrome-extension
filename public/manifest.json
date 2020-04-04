@@ -17,5 +17,7 @@
     "48": "favicon.png",
     "128": "favicon.png"
   },
-  "permissions": []
+  "permissions": [
+    "activeTab"
+  ]
 }
