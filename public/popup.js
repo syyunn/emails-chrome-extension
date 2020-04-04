@@ -7,8 +7,8 @@ chrome.tabs.executeScript({
 
     console.log("src", htmlString, typeof htmlString)
     console.log("plainText", emails, typeof emails)
-    localStorage.setItem("emails", JSON.stringify(emails));
-
+    sessionStorage.setItem("emails", JSON.stringify(emails))
+    console.log("emails in popup", sessionStorage.getItem("emails"))
 });
 
 function extractEmails(text) {
