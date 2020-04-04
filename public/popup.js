@@ -3,10 +3,12 @@ chrome.tabs.executeScript({
 }, function (src) {
     const htmlString = src[0]
 
-    let plainText = extractEmails(htmlString)
+    let emails = extractEmails(htmlString)
 
     console.log("src", htmlString, typeof htmlString)
-    console.log("plainText", plainText, typeof plainText)
+    console.log("plainText", emails, typeof emails)
+    localStorage.setItem("emails", JSON.stringify(emails));
+
 });
 
 function extractEmails(text) {
