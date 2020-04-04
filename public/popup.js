@@ -10,5 +10,6 @@ chrome.tabs.executeScript({
 });
 
 function extractEmails(text) {
-    return text.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
+    const names = text.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
+    return [...new Set(names)];
 }
