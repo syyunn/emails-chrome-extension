@@ -20,8 +20,8 @@ export const Lists: FunctionComponent = () => {
     }, [emails]);
 
     return (
-        <div className="pa3 pa5-ns">
-            <ul className="list pl0 measure center">
+        <div className="">
+            <ul className="list pl0 measure center overflow-y-auto">
                 {emails != null ? JSON.parse(emails).map((email: string) => <li className="lh-copy pv3 ba bl-0 bt-0 br-0 b--dotted b--black-30">{email}</li>) : null}
             </ul>
         </div>
