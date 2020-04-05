@@ -13,7 +13,7 @@ chrome.tabs.executeScript({
 
 function extractEmails(text) {
     let validNames = []
-    const names = text.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
+    const names = text.match(/([a-zA-Z0-9._-]+@[a-zA-Z._-]+\.[a-zA-Z0-9._-]+)/gi);
 
     if (names == null) {
         return []
