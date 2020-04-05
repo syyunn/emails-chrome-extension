@@ -91,6 +91,7 @@ function updateBadge() {
                     });
                 }
             } else {
+                // for the case like chrome-extension page that doesn't have url or html-src.
                 console.log("no src detected")
                 sessionStorage.setItem("emails", JSON.stringify(emails))
                 chrome.browserAction.setBadgeText({
