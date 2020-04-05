@@ -4,14 +4,10 @@ export default {
     title: 'Assets|Logo',
 };
 
-type LogoProp = {
-    textColor?: string
-}
-
-export const Logo: FunctionComponent<LogoProp> = ({ textColor = "navy" }) => {
+export const Logo: FunctionComponent = () => {
 
     return (
-        <div className="flex items-center pl4 bb b--light-silver pb2 pt2" style={{ height: "16.5vh" }}>
+        <div className="flex items-center pl4 bb b--light-silver pb3 pt2" style={{ height: "16.5vh", boxShadow: "0px 5px 5px silver" }}>
             <div className="flex items-center">
                 <h1 className="f-subheadline mt0 mb0 w50 near-black">dpgm</h1>
                 <h1 className="f-subheadline fw2 mt0 mb0 w50 ml3 mid-gray">mails</h1>
