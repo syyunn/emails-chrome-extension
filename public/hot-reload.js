@@ -72,15 +72,29 @@ function updateBadge() {
         chrome.tabs.executeScript({
             code: "document.documentElement.outerHTML"
         }, function (src) {
-            const htmlString = src[0]
-            console.log("running executescript")
-            emails = extractEmails(htmlString)
-            sessionStorage.setItem("emails", JSON.stringify(emails))
+            if (src) {
+                const htmlString = src[0]
+                console.log("running executescript")
+                emails = extractEmails(htmlString)
+                sessionStorage.setItem("emails", JSON.stringify(emails))
 
-            if (emails.length != 0) {
-                chrome.browserAction.setBadgeBackgroundColor({ color: "#19A974" });
+                if (emails.length != 0) {
+                    console.log("emails detected @ background", emails)
+                    chrome.browserAction.setBadgeBackgroundColor({ color: "#19A974" });
+                    chrome.browserAction.setBadgeText({
+                        text: emails.length.toString(),
+                    });
+                } else {
+                    console.log("emails are 0")
+                    chrome.browserAction.setBadgeText({
+                        text: '',
+                    });
+                }
+            } else {
+                console.log("no src detected")
+                sessionStorage.setItem("emails", JSON.stringify(emails))
                 chrome.browserAction.setBadgeText({
-                    text: emails.length.toString(),
+                    text: '',
                 });
             }
         });
