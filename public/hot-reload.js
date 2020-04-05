@@ -57,6 +57,11 @@ chrome.tabs.onUpdated.addListener(updateBadge);
 
 // fires when active tab changes
 chrome.tabs.onActivated.addListener(updateBadge);
+chrome.windows.onFocusChanged.addListener(updateBadge);
+// chrome.tabs.onDetached.addListener(updateBadge);
+
+// chrome.tabs.onAttached.addListener(updateBadge);
+
 
 let emails = []
 
