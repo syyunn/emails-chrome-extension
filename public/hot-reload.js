@@ -51,6 +51,7 @@ chrome.management.getSelf(self => {
     }
 })
 
+
 // fires when tab is updated
 chrome.tabs.onUpdated.addListener(updateBadge);
 
@@ -75,6 +76,7 @@ function updateBadge() {
             console.log("running executescript")
             emails = extractEmails(htmlString)
             sessionStorage.setItem("emails", JSON.stringify(emails))
+            chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
             chrome.browserAction.setBadgeText({
                 text: emails.length.toString()
             });
