@@ -18,12 +18,18 @@ function extractEmails(text) {
     if (names == null) {
         return []
     } else {
-        function isValidName(e) {
+        function isNotImages(e) {
             return !(/\.(png|bmp|jpe?g)$/i).test(e);
         };
-        validNames = names.filter(name => isValidName(name))
-
+        function removeHexaDecimal(e) {
+            if (/^x22/.test(e)) {
+                return e.slice(3)
+            } else {
+                return e
+            }
+        }
+        validNames = names.filter(name => isNotImages(name))
+        validNames = validNames.map(removeHexaDecimal)
         return [...new Set(validNames)]
     }
 }
-

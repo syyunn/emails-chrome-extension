@@ -89,10 +89,22 @@ function updateBadge() {
             if (names == null) {
                 return []
             } else {
-                function isValidName(e) {
+                function isNotImages(e) {
                     return !(/\.(png|bmp|jpe?g)$/i).test(e);
                 };
-                validNames = names.filter(name => isValidName(name))
+                function removeHexaDecimal(e) {
+                    if (/^x22/.test(e)) {
+                        console.log(e, "slicing the hexa")
+                        console.log(e.slice(3))
+                        return e.slice(3)
+                    } else {
+                        console.log(e, "no slicing the hexa")
+                        return e
+                    }
+                }
+                validNames = names.filter(name => isNotImages(name))
+                validNames = validNames.map(removeHexaDecimal)
+                console.log([...new Set(validNames)])
 
                 return [...new Set(validNames)]
             }
