@@ -12,10 +12,24 @@ chrome.tabs.executeScript({
 });
 
 function extractEmails(text) {
+    let validNames = []
     const names = text.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
-    const validNames = names.filter(name => isValidName(name))
-    function isValidName(e) {
-        return !(/\.(png|bmp|jpe?g)$/i).test(e);
-    };
-    return [...new Set(validNames)];
+
+    if (names == null) {
+        return []
+    } else {
+        function isNotImages(e) {
+            return !(/\.(png|bmp|jpe?g)$/i).test(e);
+        };
+        function removeHexaDecimal(e) {
+            if (/^x22/.test(e)) {
+                return e.slice(3)
+            } else {
+                return e
+            }
+        }
+        validNames = names.filter(name => isNotImages(name))
+        validNames = validNames.map(removeHexaDecimal)
+        return [...new Set(validNames)]
+    }
 }

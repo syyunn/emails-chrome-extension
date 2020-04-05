@@ -76,20 +76,37 @@ function updateBadge() {
             console.log("running executescript")
             emails = extractEmails(htmlString)
             sessionStorage.setItem("emails", JSON.stringify(emails))
-            chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
+            chrome.browserAction.setBadgeBackgroundColor({ color: "#19A974" });
+
             chrome.browserAction.setBadgeText({
-                text: emails.length.toString()
+                text: emails.length.toString(),
             });
         });
 
         function extractEmails(text) {
+            let validNames = []
             const names = text.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
-            const validNames = names.filter(name => isValidName(name))
-            function isValidName(e) {
-                return !(/\.(png|bmp|jpe?g)$/i).test(e);
-            };
-            return [...new Set(validNames)];
+
+            if (names == null) {
+                return []
+            } else {
+                function isNotImages(e) {
+                    return !(/\.(png|bmp|jpe?g)$/i).test(e);
+                };
+                function removeHexaDecimal(e) {
+                    if (/^x22/.test(e)) {
+                        return e.slice(3)
+                    } else {
+                        return e
+                    }
+                }
+                validNames = names.filter(name => isNotImages(name))
+                validNames = validNames.map(removeHexaDecimal)
+                return [...new Set(validNames)]
+            }
         }
+
+
     });
 }
 
