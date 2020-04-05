@@ -76,16 +76,18 @@ function updateBadge() {
             console.log("running executescript")
             emails = extractEmails(htmlString)
             sessionStorage.setItem("emails", JSON.stringify(emails))
-            chrome.browserAction.setBadgeBackgroundColor({ color: "#19A974" });
 
-            chrome.browserAction.setBadgeText({
-                text: emails.length.toString(),
-            });
+            if (emails.length != 0) {
+                chrome.browserAction.setBadgeBackgroundColor({ color: "#19A974" });
+                chrome.browserAction.setBadgeText({
+                    text: emails.length.toString(),
+                });
+            }
         });
 
         function extractEmails(text) {
             let validNames = []
-            const names = text.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
+            const names = text.match(/([a-zA-Z0-9._-]+@[a-zA-Z._-]+\.[a-zA-Z0-9._-]+)/gi);
 
             if (names == null) {
                 return []
