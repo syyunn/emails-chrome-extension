@@ -50,3 +50,6 @@ chrome.management.getSelf(self => {
         chrome.runtime.getPackageDirectoryEntry(dir => watchChanges(dir))
     }
 })
+
+chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
+chrome.browserAction.setBadgeText({ text: "?" });
