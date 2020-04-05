@@ -57,7 +57,10 @@ chrome.tabs.onUpdated.addListener(updateBadge);
 // fires when active tab changes
 chrome.tabs.onActivated.addListener(updateBadge);
 
+let emails = []
+
 function updateBadge() {
+    console.log("updateBadge")
     // get active tab on current window
     chrome.tabs.query({ active: true, currentWindow: true }, function (arrayOfTabs) {
         // the return value is an array
@@ -65,10 +68,22 @@ function updateBadge() {
 
         if (!activeTab) return;
 
-        var count = getCount(activeTab.url);
-        chrome.browserAction.setBadgeText({
-            text: count.toString()
+        chrome.tabs.executeScript({
+            code: "document.documentElement.outerHTML"
+        }, function (src) {
+            const htmlString = src[0]
+            console.log("running executescript")
+            emails = extractEmails(htmlString)
+            sessionStorage.setItem("emails", JSON.stringify(emails))
+            chrome.browserAction.setBadgeText({
+                text: emails.length.toString()
+            });
         });
+
+        function extractEmails(text) {
+            const names = text.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
+            return [...new Set(names)];
+        }
     });
 }
 
@@ -78,3 +93,4 @@ function getCount(currentUrl) {
 
 // chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
 // chrome.browserAction.setBadgeText({ text: "?" });
+

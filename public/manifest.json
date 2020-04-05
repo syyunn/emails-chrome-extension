@@ -18,6 +18,10 @@
     "128": "favicon.png"
   },
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "tabs",
+    "notifications",
+    "http://*/",
+    "https://*/"
   ]
 }
