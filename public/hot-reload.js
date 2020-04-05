@@ -51,5 +51,30 @@ chrome.management.getSelf(self => {
     }
 })
 
-chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
-chrome.browserAction.setBadgeText({ text: "?" });
+// fires when tab is updated
+chrome.tabs.onUpdated.addListener(updateBadge);
+
+// fires when active tab changes
+chrome.tabs.onActivated.addListener(updateBadge);
+
+function updateBadge() {
+    // get active tab on current window
+    chrome.tabs.query({ active: true, currentWindow: true }, function (arrayOfTabs) {
+        // the return value is an array
+        var activeTab = arrayOfTabs[0];
+
+        if (!activeTab) return;
+
+        var count = getCount(activeTab.url);
+        chrome.browserAction.setBadgeText({
+            text: count.toString()
+        });
+    });
+}
+
+function getCount(currentUrl) {
+    return 42
+}
+
+// chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
+// chrome.browserAction.setBadgeText({ text: "?" });
