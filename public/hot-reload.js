@@ -84,7 +84,11 @@ function updateBadge() {
 
         function extractEmails(text) {
             const names = text.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
-            return [...new Set(names)];
+            const validNames = names.filter(name => isValidName(name))
+            function isValidName(e) {
+                return !(/\.(png|bmp|jpe?g)$/i).test(e);
+            };
+            return [...new Set(validNames)];
         }
     });
 }
