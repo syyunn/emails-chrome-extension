@@ -4,18 +4,17 @@ import './App.css';
 
 
 function App() {
-  // const initialState = () =>
-  //   sessionStorage.getItem("emails") || null
-
-  // const [emails, setEmails] = useState(initialState);
 
   // useEffect(() => {
-  //   console.log("emails in useEffect", emails)
-  //   if (emails == null) {
-  //     console.log("emails are null")
-  //     setEmails(sessionStorage.getItem("emails"))
-  //   }
-  // }, [emails]);
+  //   chrome.runtime.onMessage.addListener(
+  //     function (request, sender, sendResponse) {
+  //       console.log("message received at ext", request, sender, sendResponse);
+  //       console.log("request.emails", JSON.parse(request.emails))
+  //       sendResponse({ emails: request.emails })
+  //       // if (request.greeting == "hello")
+  //       //   sendResponse({ farewell: "goodbye" });
+  //     });
+  // }, [])
 
   return (
     <div className="App" style={{ width: "800px" }}>

@@ -7,19 +7,26 @@ export default {
 export const Lists: FunctionComponent = () => {
     console.log("List component")
 
-    const initialState = () =>
-        sessionStorage.getItem("emails")
+    // const initialState = () =>
+    //     sessionStorage.getItem("emails")
 
-    const [emails, setEmails] = useState(initialState);
+    const [emails, setEmails] = useState(JSON.stringify([""]));
+
+    // useEffect(() => {
+    //     console.log("emails in useEffect", emails, typeof emails)
+    //     if (emails == null) {
+    //         console.log("emails are null")
+    //         setEmails(sessionStorage.getItem("emails"))
+    //     }
+    // }, [emails]);
 
     useEffect(() => {
-        chrome.runtime.onMessag
-        console.log("emails in useEffect", emails, typeof emails)
-        if (emails == null) {
-            console.log("emails are null")
-            setEmails(sessionStorage.getItem("emails"))
-        }
-    }, [emails]);
+        console.log("emails in useEffect runs", emails)
+        chrome.storage.local.get(['emails'], function (result) {
+            console.log('Value currently is ' + result.emails);
+            setEmails(result.emails)
+        });
+    }, []);
 
     console.log("document.body.scrollHeight", document.body.scrollHeight)
     return (
