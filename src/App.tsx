@@ -18,7 +18,7 @@ function App() {
   // }, [emails]);
 
   return (
-    <div className="App" style={{ width: "800px", height: "600px" }}>
+    <div className="App" style={{ width: "800px" }}>
       <Entire />
     </div>
   );
