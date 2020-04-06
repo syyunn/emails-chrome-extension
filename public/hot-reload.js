@@ -110,7 +110,7 @@ function updateBadge() {
 
         function extractEmails(text) {
             let validNames = []
-            const names = text.match(/([a-zA-Z0-9._-]+@[a-zA-Z._-]+\.[a-zA-Z0-9._-])/gi);
+            const names = text.match(/([a-zA-Z0-9._-]+@[a-zA-Z._-]+\.[a-zA-Z0-9._-]+)/gi);
 
             if (names == null) {
                 return []
@@ -125,8 +125,16 @@ function updateBadge() {
                         return e
                     }
                 }
+                function removeEndPeriod(e) {
+                    if (/.*(\.)$/.test(e)) {
+                        return e.slice(-1)
+                    } else {
+                        return e
+                    }
+                }
                 validNames = names.filter(name => isNotImages(name))
                 validNames = validNames.map(removeHexaDecimal)
+                validNames = validNames.map(removeEndPeriod)
                 return [...new Set(validNames)]
             }
         }
