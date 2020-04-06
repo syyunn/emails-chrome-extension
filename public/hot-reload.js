@@ -104,7 +104,9 @@ function updateBadge() {
             } else {
                 // for the case like chrome-extension page that doesn't have url or html-src.
                 console.log("no src detected")
-                sessionStorage.setItem("emails", JSON.stringify(emails))
+                chrome.storage.local.set({ emails: JSON.stringify([""]) }, function () {
+                    console.log('emails is set to ' + JSON.stringify([""]));
+                });
                 chrome.browserAction.setBadgeText({
                     text: '',
                 });
@@ -113,7 +115,7 @@ function updateBadge() {
 
         function extractEmails(text) {
             let validNames = []
-            const names = text.match(/([a-zA-Z0-9._-]+@[a-zA-Z._-]+\.[a-zA-Z0-9._-]+)/gi);
+            const names = text.match(/([a-zA-Z0-9._-]+@[a-zA-Z._-]+\.[a-zA-Z0-9._-]+)/gi); //this one most fast though requires post-works. even including those post works
 
             if (names == null) {
                 return []
@@ -135,21 +137,18 @@ function updateBadge() {
                         return e
                     }
                 }
+                function atLeastThreeStrings(e) {
+                    return e.length >= 3
+                }
+
                 validNames = names.filter(name => isNotImages(name))
                 validNames = validNames.map(removeHexaDecimal)
                 validNames = validNames.map(removeEndPeriod)
+                validNames = validNames.filter(name => atLeastThreeStrings(name))
+
                 return [...new Set(validNames)]
             }
         }
-
-
     });
 }
-
-function getCount(currentUrl) {
-    return 42
-}
-
-// chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
-// chrome.browserAction.setBadgeText({ text: "?" });
 
