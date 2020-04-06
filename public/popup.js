@@ -5,7 +5,7 @@ chrome.tabs.executeScript({
 
     let emails = extractEmails(htmlString)
 
-    console.log("src", htmlString, typeof htmlString)
+    // console.log("src", htmlString, typeof htmlString)
     console.log("emails", emails, typeof emails)
     sessionStorage.setItem("emails", JSON.stringify(emails))
     console.log("emails in popup", sessionStorage.getItem("emails"))

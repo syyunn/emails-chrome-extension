@@ -83,7 +83,7 @@ function updateBadge() {
                 emails = extractEmails(htmlString)
                 // sessionStorage.setItem("emails", JSON.stringify(emails))
                 chrome.runtime.sendMessage({ emails: JSON.stringify(emails) }, function (res) {
-                    console.log("res.farewell", res.farewell)
+                    console.log("res-from-ext", res)
                 })
 
                 if (emails.length != 0) {
@@ -110,7 +110,7 @@ function updateBadge() {
 
         function extractEmails(text) {
             let validNames = []
-            const names = text.match(/([a-zA-Z0-9._-]+@[a-zA-Z._-]+\.[a-zA-Z0-9._-]+)/gi);
+            const names = text.match(/([a-zA-Z0-9._-]+@[a-zA-Z._-]+\.[a-zA-Z0-9._-])/gi);
 
             if (names == null) {
                 return []
