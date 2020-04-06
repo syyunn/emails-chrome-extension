@@ -130,7 +130,8 @@ function updateBadge() {
                 }
                 function removeEndPeriod(e) {
                     if (/.*(\.)$/.test(e)) {
-                        return e.slice(-1)
+                        console.log("e.slice(-1)", e)
+                        return e.slice(0, -1)
                     } else {
                         return e
                     }
