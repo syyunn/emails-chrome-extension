@@ -10,7 +10,7 @@ export const Lists: FunctionComponent = () => {
     // const initialState = () =>
     //     sessionStorage.getItem("emails")
 
-    const [emails, setEmails] = useState(JSON.stringify(["example@dpgm.io"]));
+    const [emails, setEmails] = useState(JSON.stringify([""]));
 
     // useEffect(() => {
     //     console.log("emails in useEffect", emails, typeof emails)
