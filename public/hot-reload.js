@@ -82,9 +82,12 @@ function updateBadge() {
                 console.log("running executescript")
                 emails = extractEmails(htmlString)
                 // sessionStorage.setItem("emails", JSON.stringify(emails))
-                chrome.runtime.sendMessage({ emails: JSON.stringify(emails) }, function (res) {
-                    console.log("res-from-ext", res)
-                })
+                // chrome.runtime.sendMessage({ emails: JSON.stringify(emails) }, function (res) {
+                //     console.log("res-from-ext", res)
+                // })
+                chrome.storage.local.set({ emails: JSON.stringify(emails) }, function () {
+                    console.log('emails is set to ' + JSON.stringify(emails));
+                });
 
                 if (emails.length != 0) {
                     console.log("emails detected @ background", emails)

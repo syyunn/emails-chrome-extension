@@ -23,6 +23,7 @@
     "notifications",
     "http://*/",
     "https://*/",
-    "*://*/*"
+    "*://*/*",
+    "storage"
   ]
 }
