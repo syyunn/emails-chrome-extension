@@ -13,7 +13,6 @@ export const Lists: FunctionComponent = () => {
     const [emails, setEmails] = useState(initialState);
 
     useEffect(() => {
-        chrome.runtime.onMessag
         console.log("emails in useEffect", emails, typeof emails)
         if (emails == null) {
             console.log("emails are null")
