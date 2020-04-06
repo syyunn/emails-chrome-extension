@@ -13,12 +13,10 @@ export const Lists: FunctionComponent = () => {
     const [emails, setEmails] = useState(initialState);
 
     useEffect(() => {
-        console.log("emails in useEffect", emails, typeof emails)
-        if (emails == null) {
-            console.log("emails are null")
-            setEmails(sessionStorage.getItem("emails"))
-        }
-    }, [emails]);
+        chrome.runtime.onMessage.addListener((message) => {
+            console.log("message", message)
+        })
+    }, []);
 
     console.log("document.body.scrollHeight", document.body.scrollHeight)
     return (
