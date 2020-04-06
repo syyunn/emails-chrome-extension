@@ -5,13 +5,15 @@ export default {
 };
 
 export const Lists: FunctionComponent = () => {
+    console.log("List component")
 
     const initialState = () =>
-        sessionStorage.getItem("emails") || null
+        sessionStorage.getItem("emails")
 
     const [emails, setEmails] = useState(initialState);
 
     useEffect(() => {
+        chrome.runtime.onMessag
         console.log("emails in useEffect", emails, typeof emails)
         if (emails == null) {
             console.log("emails are null")
@@ -19,13 +21,6 @@ export const Lists: FunctionComponent = () => {
         }
     }, [emails]);
 
-    // return (
-    //     <div classNameName="">
-    //         <ul classNameName="list pl0 measure center overflow-y-auto">
-    //             {emails != null ? JSON.parse(emails).map((email: string) => <li classNameName="lh-copy pv3 ba bl-0 bt-0 br-0 b--dotted b--black-30">{email}</li>) : null}
-    //         </ul>
-    //     </div>
-    // )
     console.log("document.body.scrollHeight", document.body.scrollHeight)
     return (
         <div className="pa4">
@@ -49,4 +44,3 @@ export const Lists: FunctionComponent = () => {
     )
 };
 
-// https://danmarshall.github.io/google-font-to-svg-path/
